@@ -19,12 +19,15 @@ var similarWizardClasses = {
 var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
+var setupUserName = setup.querySelector('.setup-user-name');
 var setupPlayerClasses = {
   setupBoard: '.setup-player',
   coat: '.setup-wizard .wizard-coat',
   eyes: '.setup-wizard .wizard-eyes',
   fireball: '.setup-fireball',
 };
+var KEY_ESCAPE = 'Escape';
+var KEY_ENTER = 'Enter';
 var setupPlayer = document.querySelector(setupPlayerClasses.setupBoard);
 
 var findAndRemoveClass = function (selector, deletedClass) {
@@ -91,7 +94,7 @@ var changeColor = function (element, colors, isFill) {
 };
 
 var onPopupEscPress = function (evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === KEY_ESCAPE) {
     evt.preventDefault();
     closePopup();
   }
@@ -117,8 +120,9 @@ var openPopup = function () {
 };
 
 var closePopup = function () {
-  setup.classList.add('hidden');
-
+  if (!setupUserName.matches(':focus')) {
+    setup.classList.add('hidden');
+  }
   document.removeEventListener('keydown', onPopupEscPress);
   setupPlayer.removeEventListener('click', onWizardClick);
 };
@@ -131,7 +135,7 @@ setupOpen.addEventListener('click', function () {
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Enter') {
+  if (evt.key === KEY_ENTER) {
     openPopup();
   }
 });
@@ -141,7 +145,7 @@ setupClose.addEventListener('click', function () {
 });
 
 setupClose.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Enter') {
+  if (evt.key === KEY_ENTER) {
     closePopup();
   }
 });
