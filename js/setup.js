@@ -19,7 +19,6 @@ var similarWizardClasses = {
 var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
-var setupUserName = setup.querySelector('.setup-user-name');
 var setupPlayerClasses = {
   setupBoard: '.setup-player',
   coat: '.setup-wizard .wizard-coat',
@@ -94,7 +93,7 @@ var changeColor = function (element, colors, isFill) {
 };
 
 var onPopupEscPress = function (evt) {
-  if (evt.key === KEY_ESCAPE) {
+  if (evt.key === KEY_ESCAPE && !evt.target.classList.contains('setup-user-name')) {
     evt.preventDefault();
     closePopup();
   }
@@ -120,9 +119,7 @@ var openPopup = function () {
 };
 
 var closePopup = function () {
-  if (!setupUserName.matches(':focus')) {
-    setup.classList.add('hidden');
-  }
+  setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
   setupPlayer.removeEventListener('click', onWizardClick);
 };
