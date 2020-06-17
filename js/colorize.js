@@ -2,7 +2,7 @@
 
 (function () {
   window.colorize = function (element, colors, isFill) {
-    var randomColor = colors[window.getRandomIndex(colors.length)];
+    var randomColor = colors[window.util.getRandomIndex(colors.length)];
 
     if (isFill) {
       element.style.fill = randomColor;

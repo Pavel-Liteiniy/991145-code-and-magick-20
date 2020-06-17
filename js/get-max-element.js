@@ -1,4 +1,5 @@
 'use strict';
+
 (function () {
   window.getMaxElement = function (arr) {
     var maxElement = arr[0];

@@ -20,9 +20,9 @@
 
   var customizePersonage = function (names, surnames, coatColors, eyesColors) {
     return {
-      name: window.getRandomFullName(names, surnames),
-      coatColor: coatColors[window.getRandomIndex(coatColors.length)],
-      eyesColor: eyesColors[window.getRandomIndex(eyesColors.length)],
+      name: window.util.getRandomFullName(names, surnames),
+      coatColor: coatColors[window.util.getRandomIndex(coatColors.length)],
+      eyesColor: eyesColors[window.util.getRandomIndex(eyesColors.length)],
     };
   };
 
