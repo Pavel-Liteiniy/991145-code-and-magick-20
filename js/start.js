@@ -14,6 +14,11 @@
 
   var titleRows = ['Ура вы победили!', 'Список результатов:'];
 
+  var renderRect = function (ctx, x, y, width, height, color) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, width, height);
+  };
+
   var drawText = function (ctx, text, x, y, color, font) {
     ctx.font = font || '16px PT Mono';
     ctx.fillStyle = color || '#000000';
@@ -31,13 +36,25 @@
     drawText(ctx, Math.round(playerTime), startPoint, CLOUD_BOTTOM - GAP * 4 - FONT_GAP - barHeight);
   };
 
+  var getMaxElement = function (arr) {
+    var maxElement = arr[0];
+
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > maxElement) {
+        maxElement = arr[i];
+      }
+    }
+
+    return maxElement;
+  };
+
   window.renderStatistics = function (ctx, players, times) {
-    window.renderRect(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, CLOUD_WIDTH, CLOUD_HEIGHT, 'rgba(0, 0, 0, 0.7)');
-    window.renderRect(ctx, CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT, '#ffffff');
+    renderRect(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, CLOUD_WIDTH, CLOUD_HEIGHT, 'rgba(0, 0, 0, 0.7)');
+    renderRect(ctx, CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT, '#ffffff');
 
     renderTitle(ctx, titleRows);
 
-    var maxTime = window.getMaxElement(times);
+    var maxTime = getMaxElement(times);
 
     for (var i = 0; i < players.length; i++) {
       var barItemHeight = (BAR_HEIGHT * times[i]) / maxTime;
@@ -45,7 +62,7 @@
 
       addBarDescription(ctx, players[i], times[i], barItemHeight, barX, '#000000');
 
-      window.renderRect(ctx, barX, CLOUD_BOTTOM - GAP * 3 - FONT_GAP - barItemHeight, BAR_WIDTH, barItemHeight, players[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : window.util.getRandomBlueSaturate());
+      renderRect(ctx, barX, CLOUD_BOTTOM - GAP * 3 - FONT_GAP - barItemHeight, BAR_WIDTH, barItemHeight, players[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : window.util.getRandomBlueSaturate());
     }
   };
 })();

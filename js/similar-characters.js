@@ -18,6 +18,10 @@
     wizardEyes: '.wizard-eyes',
   };
 
+  var removeByClass = function (selector, deletedClass) {
+    document.querySelector(selector).classList.remove(deletedClass);
+  };
+
   var customizePersonage = function (names, surnames, coatColors, eyesColors) {
     return {
       name: window.util.getRandomFullName(names, surnames),
@@ -55,7 +59,7 @@
     }
 
     container.appendChild(fragment);
-    window.removeByClass('.setup-similar', 'hidden');
+    removeByClass('.setup-similar', 'hidden');
   };
 
   renderFragment(similarWizardTemplate, similarListElement, WIZARD_NUMBER);
